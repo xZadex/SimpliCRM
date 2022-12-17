@@ -28,9 +28,11 @@ body {
 }
 
 .login-nav-container{
-  text-align: center;
   background-color: rgb(21, 170, 191);
   padding: .5em 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-nav-container a{
@@ -50,6 +52,12 @@ body {
   color: white;
 }
 
+.link-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
 
 .CRM{
   color: rgb(252, 125, 20);

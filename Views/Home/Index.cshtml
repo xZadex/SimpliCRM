@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "SimpliCRM";
+}
+@model Owner
+<nav>
+    <div class="nav-container">
+        <div>
+            <h3 class="title-name">Simpli<span class="CRM">CRM</span></h3>
+        </div>
+        <div class="login-container">
+            <p>Already have an account?</p>
+            <a asp-action="Login" asp-controller="Home" class="login-button">Login</a>
+        </div>
+    </div>
+</nav>
+<div class="main-container">
+    <div class="content-container">
+        <h2>Create a CRM for your business today!</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur incidunt beatae fuga est cumque voluptatibus.</p>
+    </div>
+    <div>
+        <form asp-action="CreateOwner" asp-controller="Home" method="post">
+            <div class="form-container">
+                <div class="inputs-1">
+                    <div>
+                        <span asp-validation-for="FirstName" class="validation-error"></span> <br>
+                        <input asp-for="FirstName" placeholder="First Name">
+                    </div>
+                    <div>
+                        <span asp-validation-for="LastName" class="validation-error"></span><br>
+                        <input asp-for="LastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="inputs-2">
+                    <div>
+                        <span asp-validation-for="BusinessName" class="validation-error"></span><br>
+                        <input asp-for="BusinessName" placeholder="Business Name">
+                    </div>
+                    <div>
+                        <span asp-validation-for="Email" class="validation-error"></span><br>
+                        <input asp-for="Email" placeholder="Email">
+                    </div>
+                    <div>
+                        <span asp-validation-for="Password" class="validation-error"></span><br>
+                        <input asp-for="Password" placeholder="Password">
+                    </div>
+                    <div>
+                        <span asp-validation-for="Confirm" class="validation-error"></span><br>
+                        <input asp-for="Confirm" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div>
+                    <button class="create-button">Create your CRM</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

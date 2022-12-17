@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Login";
+}
+@model LoginUser
+<nav>
+    <div class="login-nav-container">
+        <div>
+            <a asp-action="Index" asp-controller="Home"><h3 class="title-name">Simpli<span class="CRM">CRM</span></h3></a>
+        </div>
+    </div>
+</nav>
+<div class="main-container">
+    <div>
+        <form asp-action="LoginUser" asp-controller="Home" method="post">
+            <div class="form-container">
+                <div class="inputs-2">
+                    <div>
+                        <span asp-validation-for="LEmail" class="validation-error"></span><br>
+                        <input asp-for="LEmail" placeholder="Email">
+                    </div>
+                    <div>
+                        <span asp-validation-for="LPassword" class="validation-error"></span><br>
+                        <input asp-for="LPassword" placeholder="Password">
+                    </div>
+                </div>
+                <div>
+                    <button class="create-button">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

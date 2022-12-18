@@ -15,11 +15,6 @@ public class Owner
     [MinLength(2, ErrorMessage ="Minimum 2 characters*")]
     public string LastName { get; set; }
 
-    [Required(ErrorMessage="Business Name is required*")]
-    [MinLength(2, ErrorMessage = "Minimum 2 characters*")]
-    [UniqueBusiness]
-    public string BusinessName {get;set;}
-
     [Required(ErrorMessage="Email is required*")]
     [EmailAddress]
     [UniqueEmail]
@@ -51,34 +46,34 @@ public class UniqueEmailAttribute : ValidationAttribute
     {
         if(value == null)
         {
-            return new ValidationResult("Email is required.");
+            return new ValidationResult("Email is required*");
         }
 
         MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
         if(_context.Owners.Any(e => e.Email == value.ToString()))
         {
-            return new ValidationResult("Email must be unique!");
+            return new ValidationResult("Email must be unique*");
         } else {
             return ValidationResult.Success;
         }
     }
 }
 
-public class UniqueBusinessAttribute : ValidationAttribute
-{
-    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
-    {
-        if(value == null)
-        {
-            return new ValidationResult("Business name is required.");
-        }
+// public class UniqueBusinessAttribute : ValidationAttribute
+// {
+//     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+//     {
+//         if(value == null)
+//         {
+//             return new ValidationResult("Business name is required*");
+//         }
 
-        MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
-        if(_context.Owners.Any(e => e.BusinessName == value.ToString()))
-        {
-            return new ValidationResult("This business is already registered");
-        } else {
-            return ValidationResult.Success;
-        }
-    }
-}
+//         MyContext _context = (MyContext)validationContext.GetService(typeof(MyContext));
+//         if(_context.Owners.Any(e => e.BusinessName == value.ToString()))
+//         {
+//             return new ValidationResult("This business is already registered*");
+//         } else {
+//             return ValidationResult.Success;
+//         }
+//     }
+// }

@@ -14,6 +14,7 @@ html {
 }
 
 body {
+  height: 100%;
   margin-bottom: 60px;
   background-color: rgb(40, 40, 40);
 }
@@ -28,9 +29,11 @@ body {
 }
 
 .login-nav-container{
-  text-align: center;
   background-color: rgb(21, 170, 191);
   padding: .5em 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-nav-container a{
@@ -50,6 +53,12 @@ body {
   color: white;
 }
 
+.link-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+}
 
 .CRM{
   color: rgb(252, 125, 20);
@@ -139,4 +148,138 @@ body {
 .create-button:hover, .login-button:hover{
   background-color: rgb(228, 105, 5);
   color: white;
+}
+
+.b-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  background-color: rgb(21, 170, 191);
+  padding: 1em 2em 1em 2em;
+  border-radius: 15px;
+}
+
+.b-container input{
+  border: none;
+  color: white;
+  background-color: rgb(15, 95, 106);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+.b-group{
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.cbutton{
+  margin-top: 1em;
+}
+
+.new-business-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.business-link{
+  text-decoration: none;
+}
+
+.business-message{
+  color: white;
+  text-align: center;
+  margin-top: 3em;
+}
+
+.business-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.business-card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 25em;
+  padding: .5em;
+  border-radius: 5px;
+  background-color: rgb(80, 80, 80);
+}
+
+.business-card:hover{
+  background-color: rgb(98, 98, 98);
+}
+
+.card-rectangle{
+  height: 35px;
+  width: 10px;
+  background-color: rgb(21, 170, 191);
+}
+
+a, a:hover{
+  color: rgb(21, 170, 191);
+  text-decoration: none;
+}
+
+.employee-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  font-size: 1.5em;
+}
+
+.business-name{
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.employee-icon{
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+.dash-left{
+  margin-top: 2em;
+  margin-left: 2em;
+  height: 80vh;
+  width: 15vw;
+  background-color: rgb(59, 59, 59);
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.nav-option{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 1em;
+  background-color: rgb(87, 87, 87);
+  margin-bottom: 1px;
+}
+
+.nav-option:hover{
+  background-color: rgb(98, 98, 98);
+}
+
+.left-title{
+  background-color: rgb(87, 87, 87);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px 15px 0 0;
+  padding: .5em;
+  color: white;
+  margin-bottom: .2em;
 }

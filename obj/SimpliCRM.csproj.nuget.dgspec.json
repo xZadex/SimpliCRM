@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj": {}
+    "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj": {
+    "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj",
+        "projectUniqueName": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj",
         "projectName": "SimpliCRM",
-        "projectPath": "C:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj",
+        "projectPath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj",
         "packagesPath": "C:\\Users\\gibso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\obj\\",
+        "outputPath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gibso\\AppData\\Roaming\\NuGet\\NuGet.Config"

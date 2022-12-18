@@ -17,8 +17,8 @@
 <main class="dash-container">
     <div class="dash-left">
         <div class="left-title">
-            <p class="m-0 p-0 h4">Welcome @if(@Context.Session.GetInt32("OwnerId") != null){@Model.Owner.FirstName}!</p>
-            @if(@Context.Session.GetInt32("OwnerId") != null){<p class="m-0 p-0">Owner</p>} else {<p class="m-0 p-0">Employee</p>}
+            @* <p class="m-0 p-0 h4">Welcome @if(@Context.Session.GetInt32("OwnerId") != null){@Model.Owner.FirstName}!</p>
+            @if(@Context.Session.GetInt32("OwnerId") != null){<p class="m-0 p-0">Owner</p>} else {<p class="m-0 p-0">Employee</p>} *@
             <p class="m-0 p-0">@DateTime.Now.ToLongDateString()</p>
             <p class="m-0 p-0">@DateTime.Now.ToShortTimeString()</p>
         </div>

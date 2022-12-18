@@ -1,0 +1,13 @@
+@model Business
+<div class="new-business-container">
+    <form asp-action="CreateBusiness" asp-controller="Home" method="post">
+        <div class="b-container">
+            <div class="b-group">
+                <input asp-for="Name" placeholder="Business Name">
+            </div>
+            <div>
+                <button class="login-button cbutton">Create Business</button>
+            </div>
+        </div>
+    </form>
+</div>

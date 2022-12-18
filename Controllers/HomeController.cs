@@ -40,8 +40,7 @@ public class HomeController : Controller
             _context.Add(newOwner);
             _context.SaveChanges();
             HttpContext.Session.SetInt32("OwnerId", newOwner.OwnerId);
-            HttpContext.Session.SetString("BusinessName", newOwner.BusinessName);
-            return RedirectToAction("Dashboard", new{name = newOwner.BusinessName});
+            return RedirectToAction("BusinessSelect");
         }
         else
         {
@@ -49,19 +48,55 @@ public class HomeController : Controller
         }
     }
 
+    [HttpGet("businesses/select")]
+    public IActionResult BusinessSelect()
+    {
+        
+        MyViewModel MyModel = new MyViewModel
+        {
+            Owner = _context.Owners.Include(e => e.CreatedBusinesses).FirstOrDefault(u => u.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+        };
+        return View(MyModel);
+    }
+
+    [HttpPost("businesses/create")]
+    public IActionResult CreateBusiness(Business newBusiness)
+    {
+        newBusiness.BusinessOwnerId = (int)HttpContext.Session.GetInt32("OwnerId");
+        _context.Add(newBusiness);
+        _context.SaveChanges();
+        return RedirectToAction("BusinessSelect");
+    }
+
+
     [HttpGet("{name}/dashboard")]
     public IActionResult Dashboard(string name)
-    {
-        if(HttpContext.Session.GetString("BusinessName") == null)
+    {   
+        if(HttpContext.Session.GetInt32("OwnerId") != null)
         {
-            return RedirectToAction("Login");
+            MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Where(e => e.BusinessOwnerId == HttpContext.Session.GetInt32("OwnerId")).FirstOrDefault(e => e.Name == name),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+            if(MyModel.Business == null)
+            {
+                return RedirectToAction("BusinessSelect");
+            }
+            return View(MyModel);
         }
-        if(HttpContext.Session.GetString("BusinessName") != name)
+        else
         {
-            return RedirectToAction("Dashboard", new{name = HttpContext.Session.GetString("BusinessName")});
+            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+            MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+            return View(MyModel);
         }
 
-        return View();
     }
 
     [HttpPost("employee/login")]
@@ -84,8 +119,8 @@ public class HomeController : Controller
                 return View("Login");
             } else {
                 HttpContext.Session.SetInt32("OwnerId", ownerInDb.OwnerId);
-                HttpContext.Session.SetString("BusinessName", ownerInDb.BusinessName);
-                return RedirectToAction("Dashboard", new{name = ownerInDb.BusinessName});
+                // HttpContext.Session.SetInt32("EmployeeId", ownerInDb.OwnerId);
+                return RedirectToAction("BusinessSelect");
             }
         } else {
             return View("Login");

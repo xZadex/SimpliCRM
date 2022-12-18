@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Select Business";
+}
+@model MyViewModel
+<nav>
+    <div class="nav-container">
+        <div>
+            <h3 class="title-name">Simpli<span class="CRM">CRM</span></h3>
+        </div>
+        <div class="login-container">
+            <form asp-action="Logout" asp-controller="Home" method="post">
+                <button class="login-button">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div>
+    <h1 class="text-center text-light mt-4">Welcome @Model.Owner.FirstName</h1>
+    @if(@Model.Owner.CreatedBusinesses.Count < 1)
+    {
+        <p class="text-light text-center mt-5">Let's start by adding your business!</p>
+        @await Html.PartialAsync("_CreateBusiness", @Model.Business)
+    }
+    else
+    {
+        <div>
+            <p class="business-message">Select a business to view the dashboard</p>
+            <div class="business-container">
+                @foreach(Business i in @Model.Owner.CreatedBusinesses)
+                {
+                    <a asp-action="Dashboard" asp-controller="Home" asp-route-name="@i.Name" class="business-link">
+                        <div class="business-card">
+                                <div class="card-rectangle"></div>
+                                <div class="business-name">@i.Name</div>
+                                <div class="employee-container"><img class="employee-icon" src="~/images/users-solid.svg" alt="employees">@i.Employees.Count</div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+</div>

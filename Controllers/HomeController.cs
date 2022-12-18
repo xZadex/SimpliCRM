@@ -99,6 +99,26 @@ public class HomeController : Controller
 
     }
 
+    [HttpGet("{name}/configure")]
+    public IActionResult Configure(string name)
+    {
+        if(HttpContext.Session.GetInt32("OwnerId") != null)
+        {
+        Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+        return View(MyModel);
+        }
+        else
+        {
+            return RedirectToAction("Dashboard");
+        }
+    }
+
     [HttpPost("employee/login")]
     public IActionResult LoginUser(LoginUser loginUser)
     {

@@ -248,6 +248,10 @@ a, a:hover{
   margin-top: 5px;
 }
 
+.dash-container{
+  display: flex;
+}
+
 .dash-left{
   margin-top: 2em;
   margin-left: 2em;
@@ -282,4 +286,15 @@ a, a:hover{
   padding: .5em;
   color: white;
   margin-bottom: .2em;
+}
+
+.config-main{
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  height: 80vh;
+  width: 85%;
+  border-radius: 15px;
+  background-color: rgb(59, 59, 59);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

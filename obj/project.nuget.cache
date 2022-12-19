@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DsCcMdLX3brKYTiMB1/0FfCFd0LxCsUZQn0COA+7Z5SAEiwYgBhRuaNE4l2I+kmdihpcveb/26LZf7h5TuDB5g==",
+  "dgSpecHash": "GnWvYiwleWqn5si0HqWpOgRN0VVn2zUIIv/chyc7f7GAKfCepKtU4vkKQpYB6I6ZZrw5QUZW/QOCgaf+HATcqQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\Backup\\SimpliCRM\\SimpliCRM.csproj",
+  "projectFilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\SimpliCRM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gibso\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\gibso\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.3\\microsoft.entityframeworkcore.6.0.3.nupkg.sha512",

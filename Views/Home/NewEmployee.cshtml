@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Configure";
+    ViewData["Title"] = "Team";
 }
 @model MyViewModel
 <nav>
@@ -37,7 +37,7 @@
                 <p class="m-0 p-0">Sales</p>
             </div>
         </a>
-        <a asp-action="Dashboard" asp-controller="Home" asp-route-name="@Model.Business.Name">
+        <a asp-action="Team" asp-controller="Home" asp-route-name="@Model.Business.Name">
             <div class="nav-option">
                 <p class="m-0 p-0">Team</p>
             </div>
@@ -47,16 +47,18 @@
                 <p class="m-0 p-0">Calender</p>
             </div>
         </a>
-        @if(Context.Session.GetInt32("OwnerId") != null)
-        {
-        <a asp-action="Configure" asp-controller="Home" asp-route-name="@Model.Business.Name">
-            <div class="nav-option">
-                <p class="m-0 p-0">Configure</p>
-            </div>
-        </a>
-        }
     </div>
     <div class="config-main">
-        
+        <div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div style="flex: 1;"></div>
+                <div style="flex: 1; text-align: center;"><h2 class="text-light">Add Employee</h2></div>
+                <div style="flex: 1; text-align: right;"></div>
+            </div>
+            <div style="width: 100%; height: 2px; background-color: white;"></div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            @await Html.PartialAsync("_CreateEmployee", @Model.Employee)
+        </div>
     </div>
 </main>

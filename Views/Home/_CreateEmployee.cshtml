@@ -1,0 +1,55 @@
+@model Employee
+<form asp-action="CreateEmployee" asp-controller="Home" method="post">
+    <div class="new-employee-container">
+            <span asp-validation-for="FirstName" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <input asp-for="FirstName" style="max-width: 20em;" placeholder="First Name">
+            </div>
+        </div>
+            <span asp-validation-for="LastName" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <input asp-for="LastName" style="max-width: 20em;" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="new-employee-input" >
+            <div>
+                <span asp-validation-for="Email" class="validation-error"></span><br>
+                <input asp-for="Email" style="max-width: 20em;" placeholder="Email">
+            </div>
+        </div>
+            <span asp-validation-for="Role" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <select asp-for="Role" style="width: 12em;">
+                    <option selected hidden disabled>Select an Role</option>
+                    <option value="Sales">Sales</option>
+                    <option value="CustomerService">Customer Service</option>
+                    <option value="Sales">Human Resources</option>
+                </select>
+            </div>
+        </div>
+            <span asp-validation-for="Birthday" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <input asp-for="Birthday" style="width: 12em;">
+            </div>
+        </div>
+            <span asp-validation-for="Password" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <input asp-for="Password" placeholder="Password">
+            </div>
+        </div>
+            <span asp-validation-for="Confirm" class="validation-error"></span>
+        <div class="new-employee-input">
+            <div>
+                <input asp-for="Confirm" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div>
+            <button class="new-employee-button">Create Employee</button>
+        </div>
+    </div>
+</form>

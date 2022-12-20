@@ -83,6 +83,8 @@ public class HomeController : Controller
             {
                 return RedirectToAction("BusinessSelect");
             }
+            Business myBusiness = _context.Businesses.FirstOrDefault(e => e.Name == name);
+            HttpContext.Session.SetString("BusinessName", name);
             return View(MyModel);
         }
         else
@@ -99,8 +101,8 @@ public class HomeController : Controller
 
     }
 
-    [HttpGet("{name}/configure")]
-    public IActionResult Configure(string name)
+    [HttpGet("{name}/Team")]
+    public IActionResult Team(string name)
     {
         if(HttpContext.Session.GetInt32("OwnerId") != null)
         {
@@ -116,6 +118,53 @@ public class HomeController : Controller
         else
         {
             return RedirectToAction("Dashboard");
+        }
+    }
+
+    
+    [HttpGet("{name}/Team/new")]
+    public IActionResult NewEmployee(string name)
+    {
+        if(HttpContext.Session.GetInt32("OwnerId") != null)
+        {
+        Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+        return View(MyModel);
+        }
+        else
+        {
+            return RedirectToAction("Dashboard");
+        }
+    }
+
+    [HttpPost("Team/create")]
+    public IActionResult CreateEmployee(Employee newEmployee)
+    {
+        Business? thisBusiness = _context.Businesses.FirstOrDefault(b => b.Name == HttpContext.Session.GetString("BusinessName"));
+        if(ModelState.IsValid)
+        {
+            newEmployee.BusinessId = thisBusiness.BusinessId;
+            PasswordHasher<Employee> Hasher = new PasswordHasher<Employee>();
+            newEmployee.Password = Hasher.HashPassword(newEmployee, newEmployee.Password);
+            _context.Add(newEmployee);
+            _context.SaveChanges();
+            return RedirectToAction("Team", new{name = HttpContext.Session.GetString("BusinessName")});
+        }
+        else
+        {
+            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == HttpContext.Session.GetString("BusinessName"));
+
+            MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+            return View("NewEmployee", MyModel);
         }
     }
 

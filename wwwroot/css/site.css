@@ -145,7 +145,7 @@ body {
   margin-top: 1.5em;
 }
 
-.create-button:hover, .login-button:hover{
+.create-button:hover, .login-button:hover, .new-employee-button:hover{
   background-color: rgb(228, 105, 5);
   color: white;
 }
@@ -316,7 +316,7 @@ a, a:hover{
   margin-bottom: 1em;
 }
 
-.new-employee-input input, .new-employee-input select{
+.new-employee-container input, .new-employee-container select{
   border: none;
   color: white;
   background-color: rgb(15, 95, 106);
@@ -337,4 +337,30 @@ a, a:hover{
   border-radius: 5px;
   transition: all 2ms ease-in-out;
   text-decoration: none;
+}
+
+.employee-card{
+  display: flex;
+  background-color: rgb(21, 170, 191);
+  width: 15em;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5em;
+  border-radius: 5px;
+  color: white;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+.employee-icon2{
+  margin-top: 2px;
+  height: 30px;
+  fill: rgb(252, 125, 20);
+}
+
+.team-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1.5em;
 }

@@ -300,10 +300,10 @@ a, a:hover{
 }
 
 .new-employee-container{
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
   max-width: fit-content;
   padding: 1em;
   border-radius: 15px;

@@ -23,8 +23,6 @@ namespace SimpliCRM.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LastName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BusinessName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "longtext", nullable: false)
@@ -46,16 +44,16 @@ namespace SimpliCRM.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    BusinessOwnerId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    BusinessOwnerOwnerId = table.Column<int>(type: "int", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Businesses", x => x.BusinessId);
                     table.ForeignKey(
-                        name: "FK_Businesses_Owners_BusinessOwnerOwnerId",
-                        column: x => x.BusinessOwnerOwnerId,
+                        name: "FK_Businesses_Owners_BusinessOwnerId",
+                        column: x => x.BusinessOwnerId,
                         principalTable: "Owners",
                         principalColumn: "OwnerId",
                         onDelete: ReferentialAction.Cascade);
@@ -74,19 +72,21 @@ namespace SimpliCRM.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Birthday = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Role = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Birthday = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BusinessId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CompanyBusinessId = table.Column<int>(type: "int", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Employees_Businesses_CompanyBusinessId",
-                        column: x => x.CompanyBusinessId,
+                        name: "FK_Employees_Businesses_BusinessId",
+                        column: x => x.BusinessId,
                         principalTable: "Businesses",
                         principalColumn: "BusinessId",
                         onDelete: ReferentialAction.Cascade);
@@ -94,14 +94,14 @@ namespace SimpliCRM.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Businesses_BusinessOwnerOwnerId",
+                name: "IX_Businesses_BusinessOwnerId",
                 table: "Businesses",
-                column: "BusinessOwnerOwnerId");
+                column: "BusinessOwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_CompanyBusinessId",
+                name: "IX_Employees_BusinessId",
                 table: "Employees",
-                column: "CompanyBusinessId");
+                column: "BusinessId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

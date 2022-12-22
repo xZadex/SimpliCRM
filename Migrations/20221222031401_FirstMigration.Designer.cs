@@ -11,8 +11,8 @@ using SimpliCRM.Models;
 namespace SimpliCRM.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20221218023241_FourthMigration")]
-    partial class FourthMigration
+    [Migration("20221222031401_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,7 +56,7 @@ namespace SimpliCRM.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CompanyBusinessId")
+                    b.Property<int>("BusinessId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -87,7 +87,7 @@ namespace SimpliCRM.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("CompanyBusinessId");
+                    b.HasIndex("BusinessId");
 
                     b.ToTable("Employees");
                 });
@@ -140,7 +140,7 @@ namespace SimpliCRM.Migrations
                 {
                     b.HasOne("SimpliCRM.Models.Business", "Company")
                         .WithMany("Employees")
-                        .HasForeignKey("CompanyBusinessId")
+                        .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

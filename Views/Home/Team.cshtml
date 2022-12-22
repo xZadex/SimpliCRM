@@ -17,8 +17,8 @@
 <main class="dash-container">
     <div class="dash-left">
         <div class="left-title">
-            <p class="m-0 p-0 h4">Welcome @if(@Context.Session.GetInt32("OwnerId") != null){@Model.Owner.FirstName}!</p>
-            @if(@Context.Session.GetInt32("OwnerId") != null){<p class="m-0 p-0">Owner</p>} else {<p class="m-0 p-0">Employee</p>}
+            <p class="m-0 p-0 h4">Welcome @if(@Context.Session.GetInt32("OwnerId") != null){@Model.Owner.FirstName}else{@Model.Employee.FirstName}!</p>
+            @if(@Context.Session.GetInt32("OwnerId") != null){<p class="m-0 p-0">Owner</p>} else {<p class="m-0 p-0">@if(Model.Employee.Role == "CSR"){<p class="m-0 p-0">Customer Service</p>}else if(Model.Employee.Role == "Sales"){<p class="m-0 p-0">Sales</p>}else if(Model.Employee.Role == "HR"){<p class="m-0 p-0">Human Resources</p>}</p>}
             <p class="m-0 p-0">@DateTime.Now.ToLongDateString()</p>
             <p class="m-0 p-0">@DateTime.Now.ToShortTimeString()</p>
         </div>
@@ -53,7 +53,12 @@
             <div class="d-flex justify-content-center align-items-center">
                 <div style="flex: 1;"></div>
                 <div style="flex: 1; text-align: center;"><h2 class="text-light">Team</h2></div>
-                <div style="flex: 1; text-align: right;"><a asp-action="NewEmployee" asp-controller="Home" asp-route-name="@Model.Business.Name" class="px-5">Add Employee +</a></div>
+                <div style="flex: 1; text-align: right;">
+                    @if(Context.Session.GetInt32("OwnerId") != null)
+                    {
+                        <a asp-action="NewEmployee" asp-controller="Home" asp-route-name="@Model.Business.Name" class="px-5">Add Employee +</a>
+                    }
+                </div>
             </div>
             <div style="width: 100%; height: 2px; background-color: white;"></div>
         </div>

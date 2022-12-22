@@ -6,37 +6,31 @@ public class Employee
 {
     [Key]
     public int EmployeeId {get;set;}
+    public int BusinessId {get;set;}
 
-    // [Required(ErrorMessage ="First Name Required*")]
+    [Required(ErrorMessage ="First Name Required*")]
     public string FirstName {get;set;}
 
-    // [Required(ErrorMessage ="Last Name Required*")]
+    [Required(ErrorMessage ="Last Name Required*")]
     public string LastName {get;set;}
 
-    // [Required(ErrorMessage ="Email Required*")]
-    // [EmailAddress]
+    [Required(ErrorMessage ="Email Required*")]
+    [EmailAddress]
     // [UniqueEmployee]
     public string Email {get;set;}
 
-    // [Required(ErrorMessage ="Role Required*")]
+    [Required(ErrorMessage ="Role Required*")]
     public string Role {get;set;}
 
-    // [Required(ErrorMessage ="Birthday Required*")]
-    // [DataType(DataType.Date)]
+    [Required(ErrorMessage ="Birthday Required*")]
+    [DataType(DataType.Date)]
     public DateTime Birthday {get;set;}
 
-    // [Required(ErrorMessage ="Password Required*")]
-    // [DataType(DataType.Password)]
-    // [MinLength(8,ErrorMessage ="Password must be at least 8 characters.")]
+    [Required(ErrorMessage ="Password Required*")]
+    [DataType(DataType.Password)]
+    [MinLength(8,ErrorMessage ="Password must be at least 8 characters.")]
     public string Password { get; set; }
 
-    // [NotMapped]
-    // [Required(ErrorMessage="Confirm is required*")]
-    // [DataType(DataType.Password)]
-    // [Compare("Password")]
-    // [Display(Name = "Confirm Password")]
-    // public string Confirm { get; set; }
-    public int BusinessId {get;set;}
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;

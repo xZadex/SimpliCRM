@@ -145,6 +145,34 @@ public IActionResult Dashboard(string name)
     }
 
 
+    [HttpGet("{name}/customers")]
+    public IActionResult Customers(string name)
+    {
+        if (HttpContext.Session.GetInt32("OwnerId") != null)
+        {
+            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+            MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+            };
+            return View(MyModel);
+        }
+        else
+        {
+            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+            MyViewModel MyModel = new MyViewModel
+            {
+                Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+                Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
+            };
+            return View(MyModel);
+        }
+    }
+
+
     [HttpGet("{name}/Team/new")]
     public IActionResult NewEmployee(string name)
     {

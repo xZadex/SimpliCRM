@@ -69,7 +69,7 @@ public class HomeController : Controller
     }
 
 
-    [HttpGet("{name}/dashboard")]
+    [HttpGet("{name}/Dashboard")]
     public IActionResult Dashboard(string name)
     {
         var ownerId = HttpContext.Session.GetInt32("OwnerId");
@@ -146,7 +146,7 @@ public class HomeController : Controller
     }
 
 
-    [HttpGet("{name}/customers")]
+    [HttpGet("{name}/Customers")]
     public IActionResult Customers(string name)
     {
         if (HttpContext.Session.GetInt32("OwnerId") != null)
@@ -174,7 +174,7 @@ public class HomeController : Controller
     }
 
 
-    [HttpGet("{name}/Team/new")]
+    [HttpGet("{name}/Team/New")]
     public IActionResult NewEmployee(string name)
     {
         if (HttpContext.Session.GetInt32("OwnerId") != null)

@@ -69,52 +69,52 @@ public class HomeController : Controller
     }
 
 
-[HttpGet("{name}/dashboard")]
-public IActionResult Dashboard(string name)
-{
-    var ownerId = HttpContext.Session.GetInt32("OwnerId");
-    var employeeId = HttpContext.Session.GetInt32("EmployeeId");
-
-    if (ownerId != null)
+    [HttpGet("{name}/dashboard")]
+    public IActionResult Dashboard(string name)
     {
-        var business = _context.Businesses.FirstOrDefault(e => e.BusinessOwnerId == ownerId && e.Name == name);
+        var ownerId = HttpContext.Session.GetInt32("OwnerId");
+        var employeeId = HttpContext.Session.GetInt32("EmployeeId");
 
-        if (business == null)
+        if (ownerId != null)
         {
-            return RedirectToAction("BusinessSelect");
+            var business = _context.Businesses.FirstOrDefault(e => e.BusinessOwnerId == ownerId && e.Name == name);
+
+            if (business == null)
+            {
+                return RedirectToAction("BusinessSelect");
+            }
+
+            HttpContext.Session.SetString("BusinessName", name);
+            HttpContext.Session.SetInt32("BusinessId", business.BusinessId);
+
+            Owner? owner = _context.Owners.FirstOrDefault(e => e.OwnerId == ownerId);
+
+            MyViewModel model = new MyViewModel
+            {
+                Business = business,
+                Owner = owner
+            };
+
+            return View(model);
         }
-
-        HttpContext.Session.SetString("BusinessName", name);
-        HttpContext.Session.SetInt32("BusinessId", business.BusinessId);
-
-        Owner? owner = _context.Owners.FirstOrDefault(e => e.OwnerId == ownerId);
-
-        MyViewModel model = new MyViewModel
+        else if (employeeId != null)
         {
-            Business = business,
-            Owner = owner
-        };
+            Business? business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(b => b.Name == name);
+            Employee? employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == employeeId);
 
-        return View(model);
-    }
-    else if (employeeId != null)
-    {
-        Business? business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(b => b.Name == name);
-        Employee? employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == employeeId);
+            var model = new MyViewModel
+            {
+                Business = business,
+                Employee = employee
+            };
 
-        var model = new MyViewModel
+            return View(model);
+        }
+        else
         {
-            Business = business,
-            Employee = employee
-        };
-
-        return View(model);
+            return RedirectToAction("Index", "Home");
+        }
     }
-    else
-    {
-        return RedirectToAction("Index", "Home");
-    }
-}
 
 
     [HttpGet("{name}/Team")]
@@ -222,14 +222,9 @@ public IActionResult Dashboard(string name)
             Employee? employeeInDb = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.Email == loginUser.LEmail);
             Owner? ownerInDb = _context.Owners.FirstOrDefault(u => u.Email == loginUser.LEmail);
 
-
-            // if(ownerInDb == null && employeeInDb != null || ownerInDb != null && employeeInDb == null)
-            // {
-            //     ModelState.AddModelError("LEmail", "Invalid Email/Password");
-            //     return View("Login");
-            // }
-            if (ownerInDb != null && employeeInDb == null)
+            if (ownerInDb != null)
             {
+                
                 PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
                 var result = hasher.VerifyHashedPassword(loginUser, ownerInDb.Password, loginUser.LPassword);
 
@@ -244,11 +239,11 @@ public IActionResult Dashboard(string name)
                     return RedirectToAction("BusinessSelect");
                 }
             }
-            else
+            else if (employeeInDb != null && ownerInDb == null)
             {
+                Console.WriteLine(employeeInDb.Email, employeeInDb.FirstName);
                 PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
                 var result = hasher.VerifyHashedPassword(loginUser, employeeInDb.Password, loginUser.LPassword);
-
                 if (result == 0)
                 {
                     ModelState.AddModelError("LEmail", "Invalid Email/Password");
@@ -260,6 +255,12 @@ public IActionResult Dashboard(string name)
                     HttpContext.Session.SetInt32("BusinessId", employeeInDb.BusinessId);
                     return RedirectToAction("Dashboard", new { name = employeeInDb.Company.Name });
                 }
+            }
+            else
+            {
+                Console.WriteLine("No employee :C");
+                ModelState.AddModelError("LEmail", "Invalid Email");
+                return View("Login");
             }
         }
         else

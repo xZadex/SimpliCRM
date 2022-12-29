@@ -16338,11 +16338,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Shared\\Error500.cshtml",
-      "TargetPath": "Views\\Shared\\Error500.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Home\\_CreateEmployee.cshtml",
       "TargetPath": "Views\\Home\\_CreateEmployee.cshtml",
       "FileKind": "mvc"
@@ -16360,11 +16355,6 @@
     {
       "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Shared\\Error404.cshtml",
-      "TargetPath": "Views\\Shared\\Error404.cshtml",
       "FileKind": "mvc"
     },
     {

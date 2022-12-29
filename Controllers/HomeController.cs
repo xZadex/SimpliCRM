@@ -116,6 +116,7 @@ public class HomeController : Controller
         }
     }
 
+    
 
     [HttpGet("{name}/Team")]
     public IActionResult Team(string name)
@@ -224,7 +225,7 @@ public class HomeController : Controller
 
             if (ownerInDb != null)
             {
-                
+
                 PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
                 var result = hasher.VerifyHashedPassword(loginUser, ownerInDb.Password, loginUser.LPassword);
 

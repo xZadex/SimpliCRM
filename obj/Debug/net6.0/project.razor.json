@@ -16328,6 +16328,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Home\\Sales.cshtml",
+      "TargetPath": "Views\\Home\\Sales.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Home\\NewEmployee.cshtml",
       "TargetPath": "Views\\Home\\NewEmployee.cshtml",
       "FileKind": "mvc"
@@ -16360,6 +16365,11 @@
     {
       "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\Views\\Home\\Calendar.cshtml",
+      "TargetPath": "Views\\Home\\Calendar.cshtml",
       "FileKind": "mvc"
     },
     {

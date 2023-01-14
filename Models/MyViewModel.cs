@@ -10,4 +10,7 @@ public class MyViewModel
 
     public Employee? Employee {get;set;}
     public List<Employee>? AllEmployees {get;set;}
+
+    public Customer? Customer {get;set;}
+    public List<Customer>? AllCustomers {get;set;}
 }

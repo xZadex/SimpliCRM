@@ -1,0 +1,52 @@
+@model Customer
+@{string? businessName = Context.Session.GetString("BusinessName");}
+@{int? businessId = Context.Session.GetInt32("BusinessId");}
+<form asp-action="CreateCustomer" asp-controller="Home" asp-route-name="@businessName" method="post">
+    <input type="hidden" value="@businessId">
+    <div class="new-customer-container">
+        <div class="d-flex gap-3">
+            <div>
+                <div class="form-group">
+                    <span asp-validation-for="FirstName" class="validation-error"></span><br>
+                    <label asp-for="FirstName">First Name:</label>
+                    <input asp-for="FirstName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="LastName" class="validation-error"></span><br>
+                    <label asp-for="LastName">Last Name:</label>
+                    <input asp-for="LastName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="PhoneNumber" class="validation-error"></span><br>
+                    <label asp-for="PhoneNumber">Phone Number:</label>
+                    <input asp-for="PhoneNumber" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Email" class="validation-error"></span><br>
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="form-control">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <span asp-validation-for="Status" class="validation-error"></span><br>
+                    <label asp-for="Status">Status:</label>
+                    <select asp-for="Status" class="form-select">
+                        <option selected hidden disabled>Select Status</option>
+                        <option value="Potential">Potential</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Birthday" class="validation-error"></span><br>
+                    <label asp-for="Birthday">Birthday:</label>
+                    <input asp-for="Birthday" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="new-employee-button pt-2 pb-2">Create Customer</button>
+        </div>
+    </div>
+</form>

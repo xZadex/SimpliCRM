@@ -299,7 +299,7 @@ a, a:hover{
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.new-employee-container{
+.new-employee-container, .new-customer-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -363,4 +363,9 @@ a, a:hover{
   flex-wrap: wrap;
   gap: 1em;
   padding: 1.5em;
+}
+
+.customer-card{
+  display: flex;
+  
 }

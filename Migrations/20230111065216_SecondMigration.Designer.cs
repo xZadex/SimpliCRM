@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpliCRM.Models;
 
@@ -10,9 +11,10 @@ using SimpliCRM.Models;
 namespace SimpliCRM.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20230111065216_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,7 +184,7 @@ namespace SimpliCRM.Migrations
             modelBuilder.Entity("SimpliCRM.Models.Customer", b =>
                 {
                     b.HasOne("SimpliCRM.Models.Business", "Company")
-                        .WithMany("Customers")
+                        .WithMany()
                         .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -203,8 +205,6 @@ namespace SimpliCRM.Migrations
 
             modelBuilder.Entity("SimpliCRM.Models.Business", b =>
                 {
-                    b.Navigation("Customers");
-
                     b.Navigation("Employees");
                 });
 

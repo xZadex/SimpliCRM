@@ -1,7 +1,7 @@
 @model Customer
 @{string? businessName = Context.Session.GetString("BusinessName");}
 @{int? businessId = Context.Session.GetInt32("BusinessId");}
-<form asp-action="CreateCustomer" asp-controller="Home" asp-route-name="@businessName" method="post">
+<form asp-action="UpdateCustomer" asp-controller="Home" asp-route-name="@businessName" asp-route-id="@Model.CustomerId" method="post">
     <input type="hidden" value="@businessId">
     <div class="new-customer-container">
         <div class="d-flex gap-3">
@@ -46,12 +46,12 @@
                 <div class="form-group">
                     <br>
                     <label asp-for="Comments">Comments:</label>
-                    <textarea asp-for="Comments" class="form-control" ;></textarea>
+                    <textarea asp-for="Comments" class="form-control" ></textarea>
                 </div>
             </div>
         </div>
         <div class="mt-3">
-            <button class="new-employee-button pt-2 pb-2">Create Customer</button>
+            <button class="new-employee-button pt-2 pb-2">Save Changes</button>
         </div>
     </div>
 </form>

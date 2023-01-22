@@ -224,6 +224,48 @@ public class HomeController : Controller
     }
 
 
+    [HttpPost("{name}/Customer/{id}/update")]
+    public IActionResult UpdateCustomer(string name, Customer customer, int id)
+    {
+        Customer? CustomerToUpdate = _context.Customers.FirstOrDefault(d => d.CustomerId == id);
+        // if(CustomerToUpdate == null)
+        // {
+        //     return View("Index");
+        // }
+        
+        // if(ModelState.IsValid)
+        // {
+            CustomerToUpdate.FirstName = customer.FirstName;
+            CustomerToUpdate.LastName = customer.LastName;
+            CustomerToUpdate.Email = customer.Email;
+            CustomerToUpdate.PhoneNumber = customer.PhoneNumber;
+            CustomerToUpdate.Birthday = customer.Birthday;
+            CustomerToUpdate.Status = customer.Status;
+            CustomerToUpdate.UpdatedAt = DateTime.Now;
+            _context.SaveChanges();
+            return RedirectToAction("Customers", new { name });
+        // } else {
+        //     return View();
+        // }
+    }
+
+    [HttpGet("{name}/Customer/{id}")]
+    public IActionResult ShowCustomer(string name, int id)
+    {
+        Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        MyViewModel MyModel = new MyViewModel
+        {
+            Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+            Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
+            Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId")),
+            Customer = _context.Customers.FirstOrDefault(e => e.CustomerId == id)
+        };
+
+        return View(MyModel);
+    }
+
+
     [HttpPost("{name}/Team/Create")]
     public IActionResult CreateEmployee(string name, Employee newEmployee)
     {

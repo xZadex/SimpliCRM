@@ -54,10 +54,40 @@
                 <div style="flex: 1;"></div>
                 <div style="flex: 1; text-align: center;"><h2 class="text-light">Sales</h2></div>
                 <div style="flex: 1; text-align: right;">
-                        <a asp-action="NewEmployee" asp-controller="Home" asp-route-name="@Model.Business.Name" class="px-5">New Sales Opportunity +</a>
+                        <a asp-action="NewSale" asp-controller="Home" asp-route-name="@Model.Business.Name" class="px-5">New Sales Opportunity +</a>
                 </div>
             </div>
             <div style="width: 100%; height: 2px; background-color: white;"></div>
+        <div>
+            @if(Model.AllSales.Count < 1)
+            {
+                <p class="text-light text-center mt-4">Make a new Sale Opportunity!</p>
+            }
+            else 
+            {
+            <table class="table table-dark table-hover">
+                <thead class="text-center">
+                    <th>Product</th>
+                    <th>Cost</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    @foreach (Sale sale in Model.AllSales)
+                    {
+                            <tr class="text-center">
+                                <td>@sale.Product</td>
+                                <td>@sale.Cost</td>
+                                <td>@sale.Customer.FirstName @sale.Customer.LastName</td>
+                                <td>@sale.Status</td>
+                                <td><a href="#">View</a></td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+            }
+        </div>
         </div>
     </div>
 </main>

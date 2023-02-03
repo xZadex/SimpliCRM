@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpliCRM.Models;
 
@@ -10,9 +11,10 @@ using SimpliCRM.Models;
 namespace SimpliCRM.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20230130204219_FifthMigration")]
+    partial class FifthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,44 +170,6 @@ namespace SimpliCRM.Migrations
                     b.ToTable("Owners");
                 });
 
-            modelBuilder.Entity("SimpliCRM.Models.Sale", b =>
-                {
-                    b.Property<int>("SaleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("BusinessId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cost")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Product")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("SaleId");
-
-                    b.HasIndex("BusinessId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Sales");
-                });
-
             modelBuilder.Entity("SimpliCRM.Models.Business", b =>
                 {
                     b.HasOne("SimpliCRM.Models.Owner", "BusinessOwner")
@@ -239,37 +203,11 @@ namespace SimpliCRM.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("SimpliCRM.Models.Sale", b =>
-                {
-                    b.HasOne("SimpliCRM.Models.Business", "Company")
-                        .WithMany("Sales")
-                        .HasForeignKey("BusinessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SimpliCRM.Models.Customer", "Customer")
-                        .WithMany("Sales")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("SimpliCRM.Models.Business", b =>
                 {
                     b.Navigation("Customers");
 
                     b.Navigation("Employees");
-
-                    b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("SimpliCRM.Models.Customer", b =>
-                {
-                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("SimpliCRM.Models.Owner", b =>

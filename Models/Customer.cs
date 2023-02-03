@@ -24,9 +24,6 @@ public class Customer
     [DataType(DataType.Date)]
     public DateTime Birthday {get;set;}
 
-    [Required(ErrorMessage = "Select Status*")]
-    public string Status {get;set;}
-
     public string Comments {get; set;}
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -34,4 +31,5 @@ public class Customer
 
     // navigation
     public Business Company { get; set; }
+    public List<Sale> Sales {get; set;} = new List<Sale>();
 }

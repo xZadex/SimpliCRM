@@ -199,6 +199,21 @@ public class HomeController : Controller
         return View(MyModel);
     }
 
+    [HttpGet("{name}/Sale/New")]
+    public IActionResult NewSale(string name)
+    {
+        Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        MyViewModel MyModel = new MyViewModel
+        {
+            Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+            Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
+            Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
+        };
+
+        return View(MyModel);
+    }
+
     [HttpPost("{name}/Customer/Create")]
     public IActionResult CreateCustomer(string name, Customer newCustomer)
     {
@@ -240,7 +255,6 @@ public class HomeController : Controller
             CustomerToUpdate.Email = customer.Email;
             CustomerToUpdate.PhoneNumber = customer.PhoneNumber;
             CustomerToUpdate.Birthday = customer.Birthday;
-            CustomerToUpdate.Status = customer.Status;
             CustomerToUpdate.UpdatedAt = DateTime.Now;
             _context.SaveChanges();
             return RedirectToAction("Customers", new { name });
@@ -296,7 +310,8 @@ public class HomeController : Controller
             MyViewModel MyModel = new MyViewModel
             {
                 Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
-                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
+                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
+                AllSales = _context.Sales.Where(e => e.BusinessId == biz.BusinessId).ToList()
             };
             return View(MyModel);
         }
@@ -307,7 +322,8 @@ public class HomeController : Controller
             MyViewModel MyModel = new MyViewModel
             {
                 Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
-                Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
+                Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId")),
+                AllSales = _context.Sales.Where(e => e.BusinessId == biz.BusinessId).ToList()
             };
             return View(MyModel);
         }

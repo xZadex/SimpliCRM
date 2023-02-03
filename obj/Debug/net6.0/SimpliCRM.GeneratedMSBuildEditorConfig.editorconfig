@@ -47,6 +47,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdFbXBsb3llZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/gibso/Desktop/SimpliCRM/SimpliCRM/Views/Home/NewSale.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdTYWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/gibso/Desktop/SimpliCRM/SimpliCRM/Views/Home/Sales.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTYWxlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -69,6 +73,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [c:/Users/gibso/Desktop/SimpliCRM/SimpliCRM/Views/Home/_CreateEmployee.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQ3JlYXRlRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/gibso/Desktop/SimpliCRM/SimpliCRM/Views/Home/_CreateSale.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfQ3JlYXRlU2FsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/gibso/Desktop/SimpliCRM/SimpliCRM/Views/Home/_EditCustomer.cshtml]

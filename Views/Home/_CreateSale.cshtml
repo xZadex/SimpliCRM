@@ -1,0 +1,39 @@
+@model Sale
+@{string? businessName = Context.Session.GetString("BusinessName");}
+@{int? businessId = Context.Session.GetInt32("BusinessId");}
+<form asp-action="CreateCustomer" asp-controller="Home" asp-route-name="@businessName" method="post">
+    <input type="hidden" value="@businessId">
+    <div class="new-customer-container">
+        <div class="d-flex gap-3">
+            <div>
+                <div class="form-group">
+                    <span asp-validation-for="CustomerId" class="validation-error"></span><br>
+                    <label asp-for="CustomerId">Customer:</label>
+                    <input asp-for="CustomerId" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Product" class="validation-error"></span><br>
+                    <label asp-for="Product">Product:</label>
+                    <input asp-for="Product" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Cost" class="validation-error"></span><br>
+                    <label asp-for="Cost">Cost:</label>
+                    <input asp-for="Cost" class="form-control">
+                </div>
+                <div class="form-group">
+                    <span asp-validation-for="Status" class="validation-error"></span><br>
+                    <label asp-for="Status">Status:</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="New Lead">New Lead</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="new-employee-button pt-2 pb-2">Create Sale</button>
+        </div>
+    </div>
+</form>

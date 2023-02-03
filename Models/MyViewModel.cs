@@ -13,4 +13,7 @@ public class MyViewModel
 
     public Customer? Customer {get;set;}
     public List<Customer>? AllCustomers {get;set;}
+
+    public Sale? Sale {get; set;}
+    public List<Sale>? AllSales {get; set;}
 }

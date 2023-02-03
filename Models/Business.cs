@@ -15,4 +15,5 @@ public class Business
     public Owner BusinessOwner { get; set; }
     public List<Employee> Employees { get; set; } = new List<Employee>();
     public List<Customer> Customers {get; set;} = new List<Customer>();
+    public List<Sale> Sales {get; set;} = new List<Sale>();
 }

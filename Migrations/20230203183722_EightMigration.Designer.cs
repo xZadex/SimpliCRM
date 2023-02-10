@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpliCRM.Models;
 
@@ -10,9 +11,10 @@ using SimpliCRM.Models;
 namespace SimpliCRM.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20230203183722_EightMigration")]
+    partial class EightMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,6 +185,9 @@ namespace SimpliCRM.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -201,6 +206,8 @@ namespace SimpliCRM.Migrations
                     b.HasKey("SaleId");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Sales");
                 });
@@ -246,7 +253,15 @@ namespace SimpliCRM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SimpliCRM.Models.Customer", "Customer")
+                        .WithMany("Sales")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Company");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("SimpliCRM.Models.Business", b =>
@@ -255,6 +270,11 @@ namespace SimpliCRM.Migrations
 
                     b.Navigation("Employees");
 
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("SimpliCRM.Models.Customer", b =>
+                {
                     b.Navigation("Sales");
                 });
 

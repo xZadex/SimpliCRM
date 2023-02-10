@@ -31,5 +31,4 @@ public class Customer
 
     // navigation
     public Business Company { get; set; }
-    public List<Sale> Sales {get; set;} = new List<Sale>();
 }

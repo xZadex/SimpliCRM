@@ -6,15 +6,14 @@ public class Sale
 {
     [Key]
     public int SaleId {get;set;}
-    public int CustomerId {get;set;}
+    public string CustomerName {get;set;}
     public int BusinessId{get; set;}
     public string Product {get; set;}
-    public int Cost {get; set;}
+    public double Cost {get; set;}
     public string Status {get;set;}
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     // navigation
-    public Customer Customer {get; set;}
     public Business Company {get; set;}
 }

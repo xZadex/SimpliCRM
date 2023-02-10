@@ -42,11 +42,6 @@
                 <p class="m-0 p-0">Team</p>
             </div>
         </a>
-        <a asp-action="Calendar" asp-controller="Home" asp-route-name="@Model.Business.Name">
-            <div class="nav-option">
-                <p class="m-0 p-0">Calendar</p>
-            </div>
-        </a>
     </div>
     <div class="config-main">
         <div>
@@ -67,9 +62,9 @@
             {
             <table class="table table-dark table-hover">
                 <thead class="text-center">
+                    <th>Customer</th>
                     <th>Product</th>
                     <th>Cost</th>
-                    <th>Customer</th>
                     <th>Status</th>
                     <th>Action</th>
                 </thead>
@@ -77,11 +72,11 @@
                     @foreach (Sale sale in Model.AllSales)
                     {
                             <tr class="text-center">
+                                <td>@sale.CustomerName</td>
                                 <td>@sale.Product</td>
                                 <td>@sale.Cost</td>
-                                <td>@sale.Customer.FirstName @sale.Customer.LastName</td>
                                 <td>@sale.Status</td>
-                                <td><a href="#">View</a></td>
+                                <td><a asp-action="ShowSale" asp-controller="Home" asp-route-name="@Model.Business.Name" asp-route-id="@sale.SaleId">View</a></td>
                             </tr>
                     }
                 </tbody>

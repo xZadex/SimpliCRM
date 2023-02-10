@@ -1,7 +1,7 @@
 @model Sale
 @{string? businessName = Context.Session.GetString("BusinessName");}
 @{int? businessId = Context.Session.GetInt32("BusinessId");}
-<form asp-action="CreateSale" asp-controller="Home" asp-route-name="@businessName" method="post">
+<form asp-action="UpdateSale" asp-controller="Home" asp-route-name="@businessName" asp-route-id="@Model.SaleId" method="post">
     <div class="new-customer-container">
         <div class="d-flex gap-3">
             <div>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="mt-3">
-            <button class="new-employee-button pt-2 pb-2">Create Sale</button>
+            <button class="new-employee-button pt-2 pb-2">Edit Sale</button>
         </div>
     </div>
 </form>

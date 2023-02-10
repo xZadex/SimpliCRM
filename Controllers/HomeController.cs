@@ -92,7 +92,10 @@ public class HomeController : Controller
             MyViewModel model = new MyViewModel
             {
                 Business = business,
-                Owner = owner
+                Owner = owner,
+                AllSales = _context.Sales.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList(),
+                AllEmployees = _context.Employees.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList(),
+                AllCustomers = _context.Customers.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList()
             };
 
             return View(model);
@@ -101,14 +104,18 @@ public class HomeController : Controller
         {
             Business? business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(b => b.Name == name);
             Employee? employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == employeeId);
-
+            
+            HttpContext.Session.SetString("BusinessName", name);
+            HttpContext.Session.SetInt32("BusinessId", business.BusinessId);
+            
             var model = new MyViewModel
             {
                 Business = business,
-                Employee = employee
+                Employee = employee,
+                AllSales = _context.Sales.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList(),
+                AllEmployees = _context.Employees.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList(),
+                AllCustomers = _context.Customers.Where(e => e.BusinessId == HttpContext.Session.GetInt32("BusinessId")).ToList()
             };
-            HttpContext.Session.SetString("BusinessName", name);
-            HttpContext.Session.SetInt32("BusinessId", business.BusinessId);
             return View(model);
         }
         else
@@ -210,6 +217,7 @@ public class HomeController : Controller
             Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
             Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
         };
+        ViewBag.Customers = _context.Customers.Where(e => e.BusinessId == biz.BusinessId).ToList();
 
         return View(MyModel);
     }
@@ -223,6 +231,30 @@ public class HomeController : Controller
             _context.Add(newCustomer);
             _context.SaveChanges();
             return RedirectToAction("Customers", new { name });
+        // }
+        // else
+        // {
+        //     Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        //     MyViewModel MyModel = new MyViewModel
+        //     {
+        //         Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+        //         Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
+        //         Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
+        //     };
+        //     return View("NewCustomer", MyModel);
+        // }
+    }
+
+    [HttpPost("{name}/Sale/Create")]
+    public IActionResult CreateSale(string name, Sale newSale)
+    {
+        // if (ModelState.IsValid)
+        // {
+            newSale.BusinessId = (int)HttpContext.Session.GetInt32("BusinessId");
+            _context.Add(newSale);
+            _context.SaveChanges();
+            return RedirectToAction("Sales", new { name });
         // }
         // else
         // {
@@ -280,6 +312,46 @@ public class HomeController : Controller
     }
 
 
+    [HttpGet("{name}/sale/{id}")]
+    public IActionResult ShowSale(string name, int id)
+    {
+        Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
+
+        MyViewModel MyModel = new MyViewModel
+        {
+            Business = _context.Businesses.Include(e => e.BusinessOwner).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
+            Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
+            Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId")),
+            Sale = _context.Sales.FirstOrDefault(e => e.SaleId == id)
+        };
+
+        return View(MyModel);
+    }
+
+    [HttpPost("{name}/sale/{id}/update")]
+    public IActionResult UpdateSale(string name, Sale sale, int id)
+    {
+        Sale? SaleToUpdate = _context.Sales.FirstOrDefault(d => d.SaleId == id);
+        // if(CustomerToUpdate == null)
+        // {
+        //     return View("Index");
+        // }
+        
+        // if(ModelState.IsValid)
+        // {
+            SaleToUpdate.CustomerName = sale.CustomerName;
+            SaleToUpdate.Product = sale.Product;
+            SaleToUpdate.Cost = sale.Cost;
+            SaleToUpdate.Status = sale.Status;
+            SaleToUpdate.UpdatedAt = DateTime.Now;
+            _context.SaveChanges();
+            return RedirectToAction("Sales", new { name });
+        // } else {
+        //     return View();
+        // }
+    }
+
+
     [HttpPost("{name}/Team/Create")]
     public IActionResult CreateEmployee(string name, Employee newEmployee)
     {
@@ -313,6 +385,9 @@ public class HomeController : Controller
                 Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId")),
                 AllSales = _context.Sales.Where(e => e.BusinessId == biz.BusinessId).ToList()
             };
+
+            ViewBag.Customers = _context.Customers.Where(e => e.BusinessId == biz.BusinessId).ToList();
+
             return View(MyModel);
         }
         else
@@ -325,36 +400,13 @@ public class HomeController : Controller
                 Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId")),
                 AllSales = _context.Sales.Where(e => e.BusinessId == biz.BusinessId).ToList()
             };
+
+            ViewBag.Customers = _context.Customers.Where(e => e.BusinessId == biz.BusinessId).ToList();
+
             return View(MyModel);
         }
     }
 
-    [HttpGet("{name}/Calendar")]
-    public IActionResult Calendar(string name)
-    {
-        if (HttpContext.Session.GetInt32("OwnerId") != null)
-        {
-            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
-
-            MyViewModel MyModel = new MyViewModel
-            {
-                Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
-                Owner = _context.Owners.FirstOrDefault(e => e.OwnerId == HttpContext.Session.GetInt32("OwnerId"))
-            };
-            return View(MyModel);
-        }
-        else
-        {
-            Business? biz = _context.Businesses.FirstOrDefault(b => b.Name == name);
-
-            MyViewModel MyModel = new MyViewModel
-            {
-                Business = _context.Businesses.Include(e => e.BusinessOwner).Include(e => e.Employees).FirstOrDefault(i => i.BusinessId == biz.BusinessId),
-                Employee = _context.Employees.Include(e => e.Company).FirstOrDefault(e => e.EmployeeId == HttpContext.Session.GetInt32("EmployeeId"))
-            };
-            return View(MyModel);
-        }
-    }
 
     [HttpPost("employee/login")]
     public IActionResult LoginUser(LoginUser loginUser)

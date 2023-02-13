@@ -49,7 +49,7 @@
                 <div style="flex: 1;"></div>
                 <div style="flex: 1; text-align: center;"><h2 class="text-light">Customers</h2></div>
                 <div style="flex: 1; text-align: right;">
-                        <a asp-action="NewCustomer" asp-controller="Home" asp-route-name="@Model.Business.Name" style="margin-right: 10px;">Add Customer +</a>
+                        <a asp-action="NewCustomer" asp-controller="Home" asp-route-name="@Model.Business.Name" style="margin-right: 10px;" class="add-button">Add Customer +</a>
                 </div>
             </div>
             <div style="width: 100%; height: 2px; background-color: white;"></div>
@@ -59,8 +59,8 @@
                 <thead class="text-center">
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
+                    <th class="mobile-item">Email</th>
+                    <th  class="mobile-item">Phone</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -69,8 +69,8 @@
                             <tr class="text-center">
                                 <td>@customer.FirstName</td>
                                 <td>@customer.LastName</td>
-                                <td>@customer.Email</td>
-                                <td>@customer.PhoneNumber</td>
+                                <td  class="mobile-item">@customer.Email</td>
+                                <td  class="mobile-item">@customer.PhoneNumber</td>
                                 <td><a asp-action="ShowCustomer" asp-controller="Home" asp-route-name="@Model.Business.Name" asp-route-id="@customer.CustomerId">View</a></td>
                             </tr>
                     }

@@ -51,7 +51,7 @@
                 <div style="flex: 1; text-align: right;">
                     @if(Context.Session.GetInt32("OwnerId") != null)
                     {
-                        <a asp-action="NewEmployee" asp-controller="Home" asp-route-name="@Model.Business.Name" style="margin-right: 10px;">Add Employee +</a>
+                        <a asp-action="NewEmployee" asp-controller="Home" asp-route-name="@Model.Business.Name" style="margin-right: 10px;" class="add-button">Add Employee +</a>
                     }
                 </div>
             </div>

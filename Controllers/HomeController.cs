@@ -287,6 +287,7 @@ public class HomeController : Controller
             CustomerToUpdate.Email = customer.Email;
             CustomerToUpdate.PhoneNumber = customer.PhoneNumber;
             CustomerToUpdate.Birthday = customer.Birthday;
+            CustomerToUpdate.Comments = customer.Comments;
             CustomerToUpdate.UpdatedAt = DateTime.Now;
             _context.SaveChanges();
             return RedirectToAction("Customers", new { name });
@@ -407,6 +408,23 @@ public class HomeController : Controller
         }
     }
 
+    [HttpPost("{name}/sale/{id}/destroy")]
+    public IActionResult DestroySale(int id, string name)
+    {
+        Sale? SaleToDestroy = _context.Sales.SingleOrDefault(d => d.SaleId == id);
+        _context.Sales.Remove(SaleToDestroy);
+        _context.SaveChanges();
+        return RedirectToAction("Sales", new { name });
+    }
+
+    [HttpPost("{name}/Customer/{id}/destroy")]
+    public IActionResult DestroyCustomer(int id, string name)
+    {
+        Customer? CustomerToDestroy = _context.Customers.SingleOrDefault(d => d.CustomerId == id && d.BusinessId == HttpContext.Session.GetInt32("BusinessId"));
+        _context.Customers.Remove(CustomerToDestroy);
+        _context.SaveChanges();
+        return RedirectToAction("Customers", new { name });
+    }
 
     [HttpPost("employee/login")]
     public IActionResult LoginUser(LoginUser loginUser)

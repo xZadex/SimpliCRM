@@ -24,6 +24,7 @@ public class Customer
     [DataType(DataType.Date)]
     public DateTime Birthday {get;set;}
 
+    [Required(ErrorMessage ="Leave a comment*")]
     public string Comments {get; set;}
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;

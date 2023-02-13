@@ -369,6 +369,7 @@ a, a:hover{
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  gap: 1em;
 }
 
 .dashboard-container{
@@ -436,14 +437,16 @@ a, a:hover{
   }
 
   .dashboard-container{
-    height: 150px;
-    width: 150px;
+    height: 125px;
+    width: 125px;
   }
 
   .dashboard-content-container{
     align-items: center;
     flex-direction: column;
     flex-wrap: nowrap;
+    gap: 0;
+
   }
   
   .data-holder{
@@ -474,5 +477,22 @@ a, a:hover{
     width: 75px;
     height: 70px;
     border-radius: 10px;
+  }
+
+  table{
+    max-width: 100%;
+  }
+
+
+  tr{
+    font-size: 15px;
+  }
+
+  .add-button{
+    font-size: 12px;
+  }
+
+  .mobile-item{
+    display: none;
   }
 }

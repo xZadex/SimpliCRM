@@ -74,7 +74,7 @@
                             <tr class="text-center">
                                 <td>@sale.CustomerName</td>
                                 <td>@sale.Product</td>
-                                <td  class="mobile-item">@sale.Cost</td>
+                                <td  class="mobile-item">$@sale.Cost</td>
                                 <td  class="mobile-item">@sale.Status</td>
                                 <td><a asp-action="ShowSale" asp-controller="Home" asp-route-name="@Model.Business.Name" asp-route-id="@sale.SaleId">View</a></td>
                             </tr>

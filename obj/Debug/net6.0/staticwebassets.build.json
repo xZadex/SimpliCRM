@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5ceT+/GefuU4/A60RMNfHDjt7IpaUm+mPERnD9mnh+M=",
+  "Hash": "tJIq2iVdqrCtEm5ZJuqPmVLEAkB0aFFM9/oOSViDJVk=",
   "Source": "SimpliCRM",
   "BasePath": "_content/SimpliCRM",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\star-solid.svg"
+    },
+    {
+      "Identity": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\wwwroot\\images\\trash-can-solid.svg",
+      "SourceId": "SimpliCRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\wwwroot\\",
+      "BasePath": "_content/SimpliCRM",
+      "RelativePath": "images/trash-can-solid.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\trash-can-solid.svg"
     },
     {
       "Identity": "c:\\Users\\gibso\\Desktop\\SimpliCRM\\SimpliCRM\\wwwroot\\images\\users-solid.svg",
